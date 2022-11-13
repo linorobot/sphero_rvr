@@ -1,11 +1,8 @@
 #!/usr/bin/python3
 import sys
 import rclpy
+from sphero_rvr.sphero import Sphero
 
-try:
-  from sphero import Sphero
-except:
-  from sphero.sphero import Sphero
 
 def main(args=None):
   rclpy.init(args=args)

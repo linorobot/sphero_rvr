@@ -10,8 +10,8 @@ from sphero_sdk import SpheroRvrAsync
 from sphero_sdk import SerialAsyncDal
 from sphero_sdk import RvrStreamingServices
 from sphero_sdk import BatteryVoltageStatesEnum as VoltageStates
-# from sphero_sdk import ControlSystemTypesEnum
-# from sphero_sdk import ControlSystemIdsEnum
+from sphero_sdk import ControlSystemTypesEnum
+from sphero_sdk import ControlSystemIdsEnum
 from sphero_sdk import SpheroRvrTargets
 
 import tf2_ros

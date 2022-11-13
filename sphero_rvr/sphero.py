@@ -115,7 +115,7 @@ class Sphero(Node):
         await self.rvr.set_default_control_system_for_type(
             control_system_type = control_system_type, controller_id = controller_id)
         # set timeout for stopping
-        await self.rvr.set_custom_control_system_timeout(command_timeout=1000)
+        await self.rvr.set_custom_control_system_timeout(command_timeout=250)
 
         # Display status information
         nordic_main_application_version = await self.rvr.get_main_application_version(
@@ -138,8 +138,8 @@ class Sphero(Node):
         )
         self.logger.info('Voltage states: ' + state_info)
         response = await self.rvr.get_active_control_system_id()
-        controller_id = ControlSystemIdsEnum(response['controller_id'])
-        self.logger.info('Active controller: {}'.format(controller_id.name))
+        # controller_id = ControlSystemIdsEnum(response['controller_id'])
+        # self.logger.info('Active controller: {}'.format(controller_id.name))
 
     # =======================================================
     # Handler for received cmd_vel messages

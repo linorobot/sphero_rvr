@@ -7,6 +7,18 @@ Minimal implementation of a ROS2 node for the Sphero RVR robot. See hardware des
     cd sphero-sdk-raspberrypi-python
     pip install .
 
+## PI Configuration
+### Remove console logging:
+
+    sudo nano /boot/firmware/cmdline.txt 
+
+* Once open, remove `console=serial0, 115200
+
+### Install udev rules:
+
+    bash install_udev_rule.sh
+
+* Reboot computer once done.
 
 ## Mapping
 1. Reset RVR (on/off): this is necessary to reset internal Sphero odometry.

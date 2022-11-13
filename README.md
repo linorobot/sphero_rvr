@@ -1,6 +1,13 @@
 # spherorvr-ros2
 Minimal implementation of a ROS2 node for the Sphero RVR robot. See hardware description at [ROS2 Robot (Sphero RVR) with Localization, Navigation, AI, and a Thermal Imager](https://youtu.be/RVCkEL206kc).
 
+## Installation
+
+    git clone https://github.com/sphero-inc/sphero-sdk-raspberrypi-python
+    cd sphero-sdk-raspberrypi-python
+    pip install .
+
+
 ## Mapping
 1. Reset RVR (on/off): this is necessary to reset internal Sphero odometry.
 1. run **ros2 run sphero sphero_node**

@@ -41,12 +41,19 @@ class Sphero(Node):
         super().__init__('sphero')
         self.logger = self.get_logger()
         self.t_stop = threading.Event() # threading stuff
+        self.declare_parameter("port", "/dev/ttyS0",
+                                    ParameterDescriptor(type=ParameterType.PARAMETER_STRING,
+                                    description='UART port connected to Sphero'))
+
+
         self.received_components = set()
 
         self.loop = asyncio.get_event_loop()
         self.rvr = SpheroRvrAsync(
             dal=SerialAsyncDal(
-                loop=self.loop
+                loop=self.loop,
+                port_id=self.get_parameter("port").value,
+
             )
         )
 
@@ -103,10 +110,10 @@ class Sphero(Node):
         #reset position
         await self.rvr.reset_locator_x_and_y()
         # Set the default control system for RC and drive with slew
-        # control_system_type = ControlSystemTypesEnum.control_system_type_rc_drive
-        # controller_id = ControlSystemIdsEnum.rc_drive_slew_mode
+        control_system_type = ControlSystemTypesEnum.control_system_type_rc_drive
+        controller_id = ControlSystemIdsEnum.rc_drive_slew_mode
         await self.rvr.set_default_control_system_for_type(
-            control_system_type = 4, controller_id = 6)
+            control_system_type = control_system_type, controller_id = controller_id)
         # set timeout for stopping
         await self.rvr.set_custom_control_system_timeout(command_timeout=1000)
 

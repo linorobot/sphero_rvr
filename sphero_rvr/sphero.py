@@ -221,7 +221,7 @@ class Sphero(Node):
 
             if 'Velocity' in data:
                 received.add('velocity')
-                self.linear.x = data['Velocity']['X'] * 5.0 / 2 **31
+                self.linear.x = data['Velocity']['Y'] 
 
             if 'Accelerometer' in data:
                 received.add('accelerometer')

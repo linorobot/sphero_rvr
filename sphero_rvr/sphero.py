@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+import math
 from math import pi
 import os
 import sys
@@ -221,7 +221,15 @@ class Sphero(Node):
 
             if 'Velocity' in data:
                 received.add('velocity')
-                self.linear.x = data['Velocity']['Y'] + data['Velocity']['X'] 
+                linear_x = data['Velocity']['X'] 
+                linear_y = data['Velocity']['Y']
+                mag = math.sqrt(linear_x**2 + linear_y**2)
+                vel_sum = linear_x + linear_y
+
+                if vel_sum < 0:
+                    mag *= -1. 
+                    
+                self.linear.x = mag
 
             if 'Accelerometer' in data:
                 received.add('accelerometer')

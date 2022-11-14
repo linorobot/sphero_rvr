@@ -91,6 +91,7 @@ class Sphero(Node):
         self.pub_odom = self.create_publisher(Odometry, "/odom/unfiltered", 10)
 
         self.logger.info('Starting Sphero RVR')
+        self.cmd_sign = 1
 
     # =======================================================
     # Send an echo message to Sphero to check if it's connected
@@ -167,6 +168,10 @@ class Sphero(Node):
             yaw_angular_velocity=angular_vel_deg,
             flags=0))
 
+        if vel_cmd.linear.x >= 0:
+            self.cmd_sign = 1
+        elif vel_cmd.linear.x < 0:
+            self.cmd_sign = -1
     # =======================================================
     # Check if all messages were received and publish them
     # =======================================================
@@ -224,10 +229,7 @@ class Sphero(Node):
                 linear_x = data['Velocity']['X'] 
                 linear_y = data['Velocity']['Y']
                 mag = math.sqrt(linear_x**2 + linear_y**2)
-                vel_sum = linear_x + linear_y
-
-                if vel_sum < 0:
-                    mag *= -1. 
+                mag *= self.cmd_sign 
                     
                 self.linear.x = mag
 
